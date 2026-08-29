@@ -1,4 +1,5 @@
 import { useTitle } from "ahooks"
+import { Typography } from "antd"
 import { useState } from "react"
 import QuestionCard from "../../components/QuestionCard"
 import styles from "./Common.module.scss"
@@ -46,6 +47,7 @@ const rawQuestionList = [
     },
 
 ]
+const { Title } = Typography
 function List() {
     const [questionList] = useState(rawQuestionList)
     useTitle("老哥问卷，懂你的问卷")
@@ -54,7 +56,7 @@ function List() {
             {/*上*/}
             <div className={styles.header}>
                 <div className={styles.left}>
-                    <h3 style={{ background: "yellow" }}>我的问卷</h3>
+                    <Title level={3}>我的问卷</Title>
                 </div>
                 <div className={styles.right}>
                     （搜索）
