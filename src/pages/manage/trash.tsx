@@ -1,40 +1,18 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons"
-import { Button, Empty, Modal, Space, Table, Tag, Typography } from "antd"
+import { useTitle } from "ahooks"
+import { Button, Empty, Modal, Space, Table, Tag, Typography ,Spin} from "antd"
 import { useState } from "react"
-import styles from "./Common.module.scss"
 import ListSearch from "../../components/ListSearch"
+import useLoadQuestionListData from "../../hooks/useLoadQuestionListData"
+import styles from "./Common.module.scss"
 const { confirm } = Modal
-const rawQuestionList = [
-    {
-        _id: 'q1',
-        title: '问卷1',
-        isPublished: false,
-        isStar: false,
-        answerCount: 5,
-        createdAt: '3月10日 13:23',
-    },
-    {
-        _id: 'q2',
-        title: '问卷2',
-        isPublished: true,
-        isStar: false,
-        answerCount: 5,
-        createdAt: '3月10日 13:23',
-    },
-    {
-        _id: 'q3',
-        title: '问卷3',
-        isPublished: false,
-        isStar: false,
-        answerCount: 5,
-        createdAt: '3月10日 13:23',
-    },
 
-
-]
 
 const { Title } = Typography
 function Trash() {
+    useTitle("老哥问卷-回收站")
+    const { data = {}, loading } = useLoadQuestionListData({ isDeleted: true })
+    const { list = [], total = 0 } = data
     function del() {
         confirm(
             {
@@ -45,7 +23,7 @@ function Trash() {
             }
         )
     }
-    const [questionList] = useState(rawQuestionList)
+    const [questionList] = useState<string[]>([])
     const [selectedIds, SetSelectedIds] = useState<string[]>([])
     const tableColumns = [
         {
@@ -76,7 +54,7 @@ function Trash() {
                 <Button danger disabled={selectedIds.length === 0} onClick={() => del()}>彻底删除</Button>
             </Space>
         </div>
-        <Table dataSource={questionList} columns={tableColumns} pagination={false} rowKey={q => q._id} rowSelection={{ type: "checkbox", onChange: selectedRowKeys => { SetSelectedIds(selectedRowKeys as string[]) } }} />
+        <Table dataSource={list} columns={tableColumns} pagination={false} rowKey={q => q._id} rowSelection={{ type: "checkbox", onChange: selectedRowKeys => { SetSelectedIds(selectedRowKeys as string[]) } }} />
     </>
 
     return (
@@ -86,13 +64,16 @@ function Trash() {
                     <Title level={3}>回收站</Title>
                 </div>
                 <div className={styles.right}>
-                    <ListSearch/>
+                    <ListSearch />
                 </div>
             </div>
             {/*中*/}
             <div className={styles.content}>
-                {questionList.length === 0 && <Empty description="暂无数据" />}
-                {questionList.length > 0 && TableElem}
+                {
+                    loading && (<div style={{ textAlign: "center" }}><Spin /></div>)
+                }
+                {!loading && list.length === 0 && <Empty description="暂无数据" />}
+                {list.length > 0 && TableElem}
             </div>
             {/*下*/}
             <div className={styles.footer}>分页</div>

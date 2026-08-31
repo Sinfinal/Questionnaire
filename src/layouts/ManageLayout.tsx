@@ -2,22 +2,30 @@ import { BarsOutlined, DeleteOutlined, PlusOutlined, StarOutlined } from "@ant-d
 import { Button, Divider, Space,message } from "antd"
 import { Outlet, useNavigate ,useLocation} from "react-router-dom"
 import styles from "./ManageLayout.module.scss"
+import { useRequest } from "ahooks"
 import { createQuestionService } from "../service/question"
-import {useState} from "react"
+
 function ManageLayout() {
     const nav = useNavigate()
-    const { pathname } = useLocation()
-    const [loading,setLoading]=useState(false)
-    async function handleCreateClick(){
-        setLoading(true)
-        const data=await createQuestionService()
-        const {id}=data||{}
-        if (id){
-            nav(`/question/edit/${id}`)
+     const { pathname } = useLocation()
+    // const [loading,setLoading]=useState(false)
+    // async function handleCreateClick(){
+    //     setLoading(true)
+    //     const data=await createQuestionService()
+    //     const {id}=data||{}
+    //     if (id){
+    //         nav(`/question/edit/${id}`)
+    //         message.success("创建成功")
+    //     }
+    //     setLoading(false)
+    // }
+    const {loading ,run:handleCreateClick}=useRequest(createQuestionService,{
+        manual:true,
+        onSuccess(result){
+            nav(`qustion/edit/${result.id}`)
             message.success("创建成功")
         }
-        setLoading(false)
-    }
+    })
     return (
         <div className={styles.container}>
             <div className={styles.left}>

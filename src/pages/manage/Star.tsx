@@ -1,40 +1,17 @@
-import { Empty, Typography } from "antd"
-import { useState } from "react"
-import QuestionCard from "../../components/QuestionCard"
-import styles from "./Common.module.scss"
+import { Empty, Spin, Typography } from "antd"
+
+import { useTitle } from "ahooks"
 import ListSearch from "../../components/ListSearch"
-
-const rawQuestionList = [
-    {
-        _id: 'q1',
-        title: '问卷1',
-        isPublished: false,
-        isStar: true,
-        answerCount: 5,
-        createdAt: '3月10日 13:23',
-    },
-    {
-        _id: 'q2',
-        title: '问卷2',
-        isPublished: true,
-        isStar: true,
-        answerCount: 5,
-        createdAt: '3月10日 13:23',
-    },
-    {
-        _id: 'q3',
-        title: '问卷3',
-        isPublished: false,
-        isStar: true,
-        answerCount: 5,
-        createdAt: '3月10日 13:23',
-    },
+import QuestionCard from "../../components/QuestionCard"
+import useLoadQuestionListData from "../../hooks/useLoadQuestionListData"
+import styles from "./Common.module.scss"
 
 
-]
 const { Title } = Typography
 function Star() {
-    const [questionList] = useState(rawQuestionList)
+    useTitle("老哥问卷-星标问卷")
+    const { data = {}, loading } = useLoadQuestionListData({ isStar: true })
+    const { list = [], total = 0 } = data
     return (
         <>
             <div className={styles.header}>
@@ -42,13 +19,16 @@ function Star() {
                     <Title level={3}>星标问卷</Title>
                 </div>
                 <div className={styles.right}>
-                    <ListSearch/>
+                    <ListSearch />
                 </div>
             </div>
             {/*中*/}
             <div className={styles.content}>
-                {questionList.length === 0 && <Empty description="暂无数据" />}
-                {questionList.length > 0 && questionList.map(question => {
+                {
+                    loading && (<div style={{ textAlign: "center" }}><Spin /></div>)
+                }
+                {!loading && list.length === 0 && <Empty description="暂无数据" />}
+                {list.length > 0 && list.map((question: any) => {
                     const { _id } = question
                     return <QuestionCard key={_id} {...question} />
                 })}

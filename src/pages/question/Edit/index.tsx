@@ -1,24 +1,13 @@
-import { useParams } from "react-router-dom"
-import { getQuestionService } from "../../../service/question"
-import {useEffect,useState} from "react"
+
+import useLoadQuestionData from "../../../hooks/useLoadQuestionData"
 function Edit() {
-    const { id = "" } = useParams()
-    const [loading,setLoading]=useState(true)
-    const [questionData,setQuestionData]=useState({})
-    useEffect(()=>{
-        async function fn(){
-            const data=await getQuestionService(id)
-            setQuestionData(data)
-            setLoading(false)
-        }
-        fn()
-    },[])
+    const {loading,data}=useLoadQuestionData()
     return (
         <div>
             <p>Edit page</p>
-            {loading?<p>loading</p>:<p>{JSON.stringify(questionData)}</p>}
+            {loading?<p>loading</p>:<p>{JSON.stringify(data)}</p>}
 
-            <p>{JSON.stringify(questionData)}</p>
+            <p>{JSON.stringify(data)}</p>
         </div>
     )
     

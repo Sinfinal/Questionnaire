@@ -1,5 +1,6 @@
 import axios from "axios";
 import {message} from "antd"
+
 const instance =axios.create({
     timeout:10*1000,
 })
