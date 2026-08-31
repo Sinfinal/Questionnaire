@@ -2,6 +2,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons"
 import { Button, Empty, Modal, Space, Table, Tag, Typography } from "antd"
 import { useState } from "react"
 import styles from "./Common.module.scss"
+import ListSearch from "../../components/ListSearch"
 const { confirm } = Modal
 const rawQuestionList = [
     {
@@ -85,7 +86,7 @@ function Trash() {
                     <Title level={3}>回收站</Title>
                 </div>
                 <div className={styles.right}>
-                    （搜索）
+                    <ListSearch/>
                 </div>
             </div>
             {/*中*/}

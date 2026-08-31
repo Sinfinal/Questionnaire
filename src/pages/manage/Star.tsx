@@ -2,6 +2,7 @@ import { Empty, Typography } from "antd"
 import { useState } from "react"
 import QuestionCard from "../../components/QuestionCard"
 import styles from "./Common.module.scss"
+import ListSearch from "../../components/ListSearch"
 
 const rawQuestionList = [
     {
@@ -41,7 +42,7 @@ function Star() {
                     <Title level={3}>星标问卷</Title>
                 </div>
                 <div className={styles.right}>
-                    （搜索）
+                    <ListSearch/>
                 </div>
             </div>
             {/*中*/}
