@@ -3,6 +3,7 @@ import { Typography } from "antd"
 import { useState } from "react"
 import QuestionCard from "../../components/QuestionCard"
 import styles from "./Common.module.scss"
+import ListSearch from "../../components/ListSearch"
 
 const rawQuestionList = [
     {
@@ -59,7 +60,7 @@ function List() {
                     <Title level={3}>我的问卷</Title>
                 </div>
                 <div className={styles.right}>
-                    （搜索）
+                    <ListSearch/>
                 </div>
             </div>
             {/*中*/}

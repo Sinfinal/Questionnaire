@@ -3,6 +3,7 @@
     padding:12px;
     border-radius:3px;
     background-color:#fff;
+    text-align:left;
     &:hover{
         box-shadow: 0 4px 10px #e8e8e8;
     }
@@ -11,7 +12,6 @@
     display:flex;
     .left{
         flex:1;
-        background-color: green($color:green);
     }
     .right{
         flex:1;

@@ -13,13 +13,17 @@
     "@ant-design/icons": "^6.3.2",
     "ahooks": "^3.9.7",
     "antd": "^6.6.2",
+    "axios": "^1.20.0",
+    "mockjs": "^1.1.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-hook-form": "^7.87.0",
     "react-router-dom": "^7.18.2",
     "sass": "^1.103.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/mockjs": "^1.0.10",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",

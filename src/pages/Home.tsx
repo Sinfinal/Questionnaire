@@ -1,7 +1,10 @@
 import { Button, Typography } from "antd"
 import { useNavigate } from "react-router-dom"
 import { MANAGE_INDEX_PATHNAME } from "../router"
+import { useEffect } from "react"
+import axios from "axios"
 import styles from "./Home.module.scss"
+import "../_mock/index.ts"
 const { Title, Paragraph } = Typography
 function Home() {
     const nav = useNavigate()
@@ -12,7 +15,13 @@ function Home() {
     //         search: "b=1"
     //     })
     // }
-
+    useEffect(()=>{
+        // fetch("/api/test")
+        // .then(res=>res.json())
+        // .then(data=>console.log(data))
+        //mock.js只能劫持XMLHttpRequest，不能劫持fetch
+        axios.get("/api/test").then(res=>console.log("axios res",res))
+    },[])
     return (
         <div className={styles.container}>
             <div className={styles.info}>

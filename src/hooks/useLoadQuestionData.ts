@@ -1,7 +1,8 @@
+
 import { useParams } from "react-router-dom"
-import { getQuestionService } from "../../../service/question"
+import { getQuestionService } from "../service/question"
 import {useEffect,useState} from "react"
-function Edit() {
+function useLoadQuestionData(){
     const { id = "" } = useParams()
     const [loading,setLoading]=useState(true)
     const [questionData,setQuestionData]=useState({})
@@ -13,14 +14,6 @@ function Edit() {
         }
         fn()
     },[])
-    return (
-        <div>
-            <p>Edit page</p>
-            {loading?<p>loading</p>:<p>{JSON.stringify(questionData)}</p>}
-
-            <p>{JSON.stringify(questionData)}</p>
-        </div>
-    )
-    
+    return {loading,questionData}
 }
-export default Edit
+export default useLoadQuestionData
