@@ -19,4 +19,4 @@ function useLoadQuestionListData(opt:Partial<OptionType>={}){
     })
     return {data,loading,error}
 }
-export default useLoadQuestionListData
+export default useLoadQuestionListData 
