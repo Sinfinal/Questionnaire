@@ -1,10 +1,12 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons"
-import { useTitle } from "ahooks"
-import { Button, Empty, Modal, Space, Table, Tag, Typography ,Spin} from "antd"
+import { useTitle,useRequest } from "ahooks"
+import { Button, Empty, Modal, Space, Table, Tag, Typography ,Spin,message} from "antd"
 import { useState } from "react"
 import ListSearch from "../../components/ListSearch"
 import useLoadQuestionListData from "../../hooks/useLoadQuestionListData"
 import styles from "./Common.module.scss"
+import ListPage from "../../components/ListPage"
+import { updateQuestionService } from "../../service/question"
 const { confirm } = Modal
 
 
@@ -13,18 +15,52 @@ function Trash() {
     useTitle("老哥问卷-回收站")
     const { data = {}, loading } = useLoadQuestionListData({ isDeleted: true })
     const { list = [], total = 0 } = data
+    const {loading,run:recover}=useRequest(async()=>{
+        for await(const id of selectedIds){
+            await updateQuestionService(id,{isDeleted:false})
+        }
+    },
+    {
+        manual:true,
+    })
     function del() {
         confirm(
             {
                 title: "确认彻底删除问题?",
                 icon: <ExclamationCircleOutlined />,
                 content: "删除以后不可以找回",
-                onOk: () => alert(`删除${JSON.stringify(selectedIds)}`)
+                onOk: deleteQuestion
             }
         )
     }
     const [questionList] = useState<string[]>([])
     const [selectedIds, SetSelectedIds] = useState<string[]>([])
+    const {run:recover}=useRequest(
+        async()=>{
+            for await (const id of selectedIds){
+                await updateQuestionService(id,{isDeleted:false})
+            }
+        },
+        {
+            manual:true,
+            debounceWait:500,
+            onSuccess(){
+                message.success("恢复成功")
+                refresh()
+                SetSelectedIds([])
+            },
+        }
+    )
+    const {run:deleteQuestion} =useRequest(async()=>await deleteQuestionService(selectedIds),
+    {
+        manual:true,
+        onSuccess(){
+            message.success("删除成功")
+            refresh()
+            SetSelectedIds([])
+        }
+    }
+)
     const tableColumns = [
         {
             title: "标题",
@@ -50,7 +86,7 @@ function Trash() {
     const TableElem = <>
         <div style={{ marginBottom: "16px" }}>
             <Space>
-                <Button type="primary" disabled={selectedIds.length === 0}>恢复</Button>
+                <Button type="primary" disabled={selectedIds.length === 0} onClick={recover}>恢复</Button>
                 <Button danger disabled={selectedIds.length === 0} onClick={() => del()}>彻底删除</Button>
             </Space>
         </div>
@@ -76,7 +112,9 @@ function Trash() {
                 {list.length > 0 && TableElem}
             </div>
             {/*下*/}
-            <div className={styles.footer}>分页</div>
+            <div className={styles.footer}>
+                <ListPage total={total}/>
+            </div>
         </>
     )
 }

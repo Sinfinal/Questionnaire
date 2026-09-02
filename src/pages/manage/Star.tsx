@@ -1,10 +1,11 @@
-import { Empty, Spin, Typography } from "antd"
+import { Empty,  Spin, Typography } from "antd"
 
 import { useTitle } from "ahooks"
 import ListSearch from "../../components/ListSearch"
 import QuestionCard from "../../components/QuestionCard"
 import useLoadQuestionListData from "../../hooks/useLoadQuestionListData"
 import styles from "./Common.module.scss"
+import ListPage from "../../components/ListPage"
 
 
 const { Title } = Typography
@@ -34,7 +35,9 @@ function Star() {
                 })}
             </div>
             {/*下*/}
-            <div className={styles.footer}>分页</div>
+            <div className={styles.footer}>
+                <ListPage total={total}/>
+            </div>
         </>
     )
 }

@@ -8,7 +8,7 @@ import NotFound from "../pages/NotFound";
 import Register from "../pages/Register";
 import List from "../pages/manage/List";
 import Star from "../pages/manage/Star";
-import Trash from "../pages/manage/trash";
+import Trash from "../pages/manage/Trash";
 import Edit from "../pages/question/Edit";
 import Stat from "../pages/question/Stat";
 
