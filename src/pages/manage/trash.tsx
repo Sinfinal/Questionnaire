@@ -6,23 +6,16 @@ import ListSearch from "../../components/ListSearch"
 import useLoadQuestionListData from "../../hooks/useLoadQuestionListData"
 import styles from "./Common.module.scss"
 import ListPage from "../../components/ListPage"
-import { updateQuestionService } from "../../service/question"
+import { updateQuestionService, deleteQuestionService } from "../../service/question"
 const { confirm } = Modal
 
 
 const { Title } = Typography
 function Trash() {
     useTitle("老哥问卷-回收站")
-    const { data = {}, loading } = useLoadQuestionListData({ isDeleted: true })
+    const { data = {}, loading, refresh } = useLoadQuestionListData({ isDeleted: true })
     const { list = [], total = 0 } = data
-    const {loading,run:recover}=useRequest(async()=>{
-        for await(const id of selectedIds){
-            await updateQuestionService(id,{isDeleted:false})
-        }
-    },
-    {
-        manual:true,
-    })
+
     function del() {
         confirm(
             {
@@ -33,7 +26,6 @@ function Trash() {
             }
         )
     }
-    const [questionList] = useState<string[]>([])
     const [selectedIds, SetSelectedIds] = useState<string[]>([])
     const {run:recover}=useRequest(
         async()=>{
