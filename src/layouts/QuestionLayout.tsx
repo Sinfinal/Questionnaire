@@ -1,17 +1,16 @@
 import {Outlet} from "react-router-dom"
 import useLoadUserData from "../hooks/useLoadUseData"
 
-
+import useNavPage from "../hooks/useNavPage"
 import { Spin } from "antd"
 function QuestionLayout(){
     const {waitingUserData}=useLoadUserData()
+    useNavPage(waitingUserData)
     return (
         <>
-        <div>QuestionLayout header</div>
-        <div>
+        <div style={{height:"100vh"}}>
              {waitingUserData?<div style={{textAlign:"center",marginTop:"60px"}}><Spin/></div>:<Outlet />}
         </div>
-        <div>QuestionLayout footer</div>
         </>
     )
 }

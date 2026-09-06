@@ -1,4 +1,5 @@
-import { createSlice ,PayloadAction} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 export type UserStateType={
     username:string
@@ -18,4 +19,4 @@ export const userSlice=createSlice({
 })
 
 export const {loginReducer,logoutReducer}=userSlice.actions
-export default userSlice
+export default userSlice.reducer

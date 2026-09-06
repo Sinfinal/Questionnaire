@@ -14,7 +14,6 @@ function List() {
     const [list,setList]=useState([])
     const [page,setPage]=useState(1)
     const [total,setTotal]=useState(0)
-    const [loading,setLoading]=useState(true)
     const [searchParams]=useSearchParams()
     const haveMoreData=total>list.length
     const keyword=searchParams.get(LIST_SEARCH_PARAM_KEY)||""
