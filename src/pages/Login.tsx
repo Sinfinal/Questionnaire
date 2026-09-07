@@ -44,7 +44,7 @@ function Login() {
             nav(MANAGE_INDEX_PATHNAME)
         }
     })
-    const onFinish = (values:any) => {
+    const onFinish = (values) => {
         const { username, password, remember } = values
         run(username,password)
         if (remember) {
@@ -61,7 +61,7 @@ function Login() {
                     <Title level={2}>
                         <UserAddOutlined />
                     </Title>
-                    <Title level={2}>注册新用户</Title>
+                    <Title level={2}>登录</Title>
                 </Space>
             </div>
             <div>

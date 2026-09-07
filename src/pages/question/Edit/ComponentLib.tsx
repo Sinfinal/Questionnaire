@@ -5,9 +5,9 @@ const {Title}=Typography
 function genComponent(c:ComponentConfType){
     const {title,type,Component}=c
     function handlerClick(){
-        
+
     }
-    return <div className={styles.wrapper} onClick={}>
+    return <div className={styles.wrapper} onClick={()=>handlerClick}>
         <div className={styles.component}>
         <Component/>
         </div>

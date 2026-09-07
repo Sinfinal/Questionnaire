@@ -26,7 +26,7 @@ export const componentsSlice=createSlice({
         changeSelectedId:produce((draft:ComponentsStateType,action:PayloadAction<string>)=>{
             draft.selectedId=action.payload
 
-        })
+        }),
         addComponent:produce((draft:ComponentsStateType,action:PayloadAction<ComponentInfoType>)=>{
 
         })

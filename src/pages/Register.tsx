@@ -18,7 +18,7 @@ function Register(){
             nav(LOGIN_PATHNAME)
         }
     })
-    const onFinish=(values:any)=>{
+    const onFinish=(values)=>{
         run(values)
     }
     return (
