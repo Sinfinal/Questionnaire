@@ -8,6 +8,14 @@ import styles from "./Common.module.scss"
 import { LIST_PAGE_SIZE, LIST_SEARCH_PARAM_KEY } from "../../constant"
 import { getQuestionListService } from "../../service/question"
 const { Title } = Typography
+type QuestionItem = {
+    _id: string
+    title: string
+    isStar: boolean
+    isPublished: boolean
+    answerCount: number
+    createdAt: string
+}
 function List() {
     useTitle("老哥问卷，懂你的问卷")
     const [started,setStarted]=useState(false) //是否已经开始加载
@@ -19,6 +27,8 @@ function List() {
     const keyword=searchParams.get(LIST_SEARCH_PARAM_KEY)||""
     //真正加载
     useEffect(()=>{
+        // 关键字变化时重置分页状态
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setStarted(false)
         setPage(1)
         setList([])
@@ -76,7 +86,7 @@ function List() {
         if (!haveMoreData)return <span>没有更多了</span>
         return <span>开始加载下一页</span>
 
-    })
+    },[started,loading,total,haveMoreData])
     return (
         <>
             {/*上*/}
@@ -91,7 +101,7 @@ function List() {
             {/*中*/}
             <div className={styles.content}>
 
-                {list.length > 0 && list.map((question: any) => {
+                {list.length > 0 && list.map((question: QuestionItem) => {
                     const { _id } = question
                     return <QuestionCard key={_id} {...question} />
                 })}

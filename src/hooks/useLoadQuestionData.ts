@@ -1,9 +1,9 @@
 
 import { useRequest } from "ahooks"
-import { useParams, useRouteError } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { getQuestionService } from "../service/question"
 import { useEffect } from "react"
-import { useDispatch, UseDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { resetComponents } from "../store/componentsReducer/index.ts"
 
 function useLoadQuestionData(){
@@ -18,7 +18,7 @@ function useLoadQuestionData(){
     })
     useEffect(()=>{
         if(!data)return 
-        const {title="",componentList=[]}=data
+        const {componentList=[]}=data
         let selectedId=""
         if (componentList.length>0){
             selectedId=componentList[0].fe_id

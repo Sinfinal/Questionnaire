@@ -6,7 +6,7 @@ import useGetComponentInfo from "../../../hooks/useGetComponentInfo"
 import { getComponentConfByType } from "../../../components/QuestionComponents"
 import { changeSelectedId, type ComponentInfoType } from "../../../store/componentsReducer/index.ts"
 import { useDispatch } from "react-redux"
-import classNames from "classnames"
+import type { MouseEvent } from "react"
 type PropsType={
     loading:boolean
 
@@ -20,7 +20,7 @@ function genComponent(componentInfo:ComponentInfoType){
 }
 function EditCanvas(props:PropsType){
     const { loading }=props
-    const {componentList}=useGetComponentInfo()
+    const {componentList, selectedId}=useGetComponentInfo()
     const dispatch=useDispatch()
 
     function handleClick(event:MouseEvent,id:string){
@@ -37,11 +37,8 @@ function EditCanvas(props:PropsType){
             const {fe_id}=c
             const wrapperDefaultClassName=styles['component-wrapper']
             const selectedClassName=styles.selected
-            const wrapperClassname=classNames({
-                [wrapperDefaultClassName]:true,
-                [selectedClassName]:fe_id===selectedId,
-            })
-            return<div key={fe_id} className={wrapperClassname} onClick={()=>handleClick(e,fe_id)}>
+            const wrapperClassname=`${wrapperDefaultClassName} ${fe_id===selectedId?selectedClassName:""}`.trim()
+            return<div key={fe_id} className={wrapperClassname} onClick={(e)=>handleClick(e,fe_id)}>
                 <div className={styles.component}>
                     {genComponent(c)}
                 </div>

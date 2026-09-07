@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useRequest } from "ahooks"
 import { updateQuestionService } from "../service/question"
 import { duplicateQuestionService } from "../service/question"
+import type { ResDataType } from "../service/ajax"
 import styles from "./QuestionCard.module.scss"
 type PropsType = {
     _id: string
@@ -23,12 +24,12 @@ function QuestionCard(props: PropsType) {
         await updateQuestionService(_id,{isStar:!isStarState})
     },{
         manual:true,
-        onSuccess:(res)=>{
+        onSuccess:()=>{
             setIsStarState(!isStarState)
             message.success("已设置")
         }
     })
-    const [isDeletedState,setIsDeletedState]=useState(false)
+    const [isDeletedState]=useState(false)
     const {loading:duplicateLoading,run:duplicate}=useRequest(
         // async()=>{
         //     const data=await duplicateQuestionService(_id)
@@ -37,7 +38,7 @@ function QuestionCard(props: PropsType) {
         async()=>await duplicateQuestionService(_id),
         {
             manual:true,
-            onSuccess(result:any){
+            onSuccess(result: ResDataType){
                 message.success("复制成功")
                 nav(`/question/edit/${result.id}`)
             }

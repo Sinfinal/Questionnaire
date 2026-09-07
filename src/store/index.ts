@@ -9,6 +9,6 @@ export type StateType={
 export default configureStore({
     reducer:{
         user:userReducer,
-        component:componentsReducer
+        components:componentsReducer
     },
-}) 
+})
