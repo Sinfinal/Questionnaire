@@ -11,6 +11,8 @@ function ListSearch() {
     const [searchParams]=useSearchParams()
     useEffect(()=>{
         const curVal=searchParams.get(LIST_SEARCH_PARAM_KEY)||""
+        // 同步 URL 查询参数到输入框
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setValue(curVal)
     },[searchParams])
     function handleChange(event: ChangeEvent<HTMLInputElement>) {

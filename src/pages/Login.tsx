@@ -44,7 +44,7 @@ function Login() {
             nav(MANAGE_INDEX_PATHNAME)
         }
     })
-    const onFinish = (values:any) => {
+    const onFinish = (values: { username: string; password: string; remember?: boolean }) => {
         const { username, password, remember } = values
         run(username,password)
         if (remember) {

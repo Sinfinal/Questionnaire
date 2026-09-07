@@ -11,7 +11,7 @@ export const userSlice=createSlice({
     name:"user",
     initialState:INIT_STATE,
     reducers:{
-        loginReducer:(state:UserStateType,action:PayloadAction<UserStateType>)=>{
+        loginReducer:(_state:UserStateType,action:PayloadAction<UserStateType>)=>{
             return action.payload
         },
         logoutReducer:()=>INIT_STATE,

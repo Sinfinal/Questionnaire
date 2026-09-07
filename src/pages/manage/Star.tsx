@@ -9,6 +9,14 @@ import ListPage from "../../components/ListPage"
 
 
 const { Title } = Typography
+type QuestionItem = {
+    _id: string
+    title: string
+    isStar: boolean
+    isPublished: boolean
+    answerCount: number
+    createdAt: string
+}
 function Star() {
     useTitle("老哥问卷-星标问卷")
     const { data = {}, loading } = useLoadQuestionListData({ isStar: true })
@@ -29,7 +37,7 @@ function Star() {
                     loading && (<div style={{ textAlign: "center" }}><Spin /></div>)
                 }
                 {!loading && list.length === 0 && <Empty description="暂无数据" />}
-                {list.length > 0 && list.map((question: any) => {
+                {list.length > 0 && list.map((question: QuestionItem) => {
                     const { _id } = question
                     return <QuestionCard key={_id} {...question} />
                 })}

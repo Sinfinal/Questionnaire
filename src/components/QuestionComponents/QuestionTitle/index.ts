@@ -1,10 +1,12 @@
 import  Component  from "./Component";
 import { QuestionTitleDefaultProps } from "./interface";
+import PropComponent from "./PropComponent";
  
 export  * from "./interface"
 export default {
-    title:"输入框",
-    type:"questionInput",
+    title:"标题",
+    type:"questionTitle",
     Component,
-    default:QuestionTitleDefaultProps
+    PropComponent,
+    defaultProps:QuestionTitleDefaultProps
 }

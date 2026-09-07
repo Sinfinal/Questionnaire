@@ -24,9 +24,11 @@ instance.interceptors.response.use(
             }
             throw new Error(msg)
         }
+        // axios 响应拦截器返回的是处理后的数据，而非 AxiosResponse，需要绕过类型
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return data as any
     }
-    
+
 )
 export default instance
 export type ResType={
@@ -35,5 +37,7 @@ export type ResType={
     msg?:string
 }
 export type ResDataType={
+    // API 返回解构后的数据，字段不确定，保持宽松
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key:string]:any
 }

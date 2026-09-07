@@ -27,7 +27,7 @@ export async function deleteQuestionService(ids:string[]):Promise<ResDataType>{
     const data=(await axios.delete(url,{data:{ids}})) as ResDataType
     return data
 }
-export async function updateQuestionService(id:string,opt:{[key:string]:any}){
+export async function updateQuestionService(id:string,opt:Record<string,unknown>){
     const url=`/api/question/${id}`
     const data=(await axios.patch(url,opt)) as ResDataType
     return data

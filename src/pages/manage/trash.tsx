@@ -11,10 +11,17 @@ const { confirm } = Modal
 
 
 const { Title } = Typography
+type QuestionItem = {
+    _id: string
+    title: string
+    isPublished: boolean
+    answerCount: number
+    createdAt: string
+}
 function Trash() {
     useTitle("老哥问卷-回收站")
     const { data = {}, loading, refresh } = useLoadQuestionListData({ isDeleted: true })
-    const { list = [], total = 0 } = data
+    const { list = [], total = 0 } = data as { list?: QuestionItem[]; total?: number }
 
     function del() {
         confirm(
