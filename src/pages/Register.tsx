@@ -18,11 +18,7 @@ function Register(){
             nav(LOGIN_PATHNAME)
         }
     })
-<<<<<<< HEAD
-    const onFinish=(values)=>{
-=======
     const onFinish=(values:{username:string;password:string;nickname?:string})=>{
->>>>>>> f87d544b02327462c1b2bdb9b35c88ae5f4927b2
         run(values)
     }
     return (

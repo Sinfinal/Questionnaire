@@ -1,17 +1,6 @@
 import { componentConfGroup, type ComponentConfType } from "../../../components/QuestionComponents"
 import { Typography } from "antd"
 import styles from "./ComponentLib.module.scss"
-<<<<<<< HEAD
-const {Title}=Typography
-function genComponent(c:ComponentConfType){
-    const {title,type,Component}=c
-    function handlerClick(){
-
-    }
-    return <div className={styles.wrapper} onClick={()=>handlerClick}>
-        <div className={styles.component}>
-        <Component/>
-=======
 import { useDispatch } from "react-redux"
 import type { Dispatch } from "@reduxjs/toolkit"
 import { addComponent } from "../../../store/componentsReducer/index.ts"
@@ -35,7 +24,6 @@ function genComponent(c: ComponentConfType, dispatch: Dispatch) {
             <div className={styles.component}>
                 <Component />
             </div>
->>>>>>> f87d544b02327462c1b2bdb9b35c88ae5f4927b2
         </div>
     )
 }

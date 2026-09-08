@@ -37,7 +37,7 @@ function List() {
     },[keyword])
     const {run:load,loading}=useRequest(async()=>{
         const data=await getQuestionListService({
-           page:page,
+            page:page,
             pageSize:LIST_PAGE_SIZE,
             keyword
         })
