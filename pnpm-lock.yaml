@@ -14,6 +14,9 @@ importers:
       '@reduxjs/toolkit':
         specifier: ^2.12.0
         version: 2.12.0(react-redux@9.3.0(@types/react@19.2.18)(react@19.2.8)(redux@5.0.1))(react@19.2.8)
+      '@types/lodash.clonedeep':
+        specifier: ^4.5.9
+        version: 4.5.9
       ahooks:
         specifier: ^3.9.7
         version: 3.9.7(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -29,6 +32,9 @@ importers:
       immer:
         specifier: ^11.1.18
         version: 11.1.18
+      lodash.clonedeep:
+        specifier: ^4.5.0
+        version: 4.5.0
       mockjs:
         specifier: ^1.1.0
         version: 1.1.0
@@ -767,6 +773,12 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
+  '@types/lodash.clonedeep@4.5.9':
+    resolution: {integrity: sha512-19429mWC+FyaAhOLzsS8kZUsI+/GmBAQ0HFiCPsKGU+7pBXOQWhyrY6xNNDwUSX8SMZMJvuFVMF9O5dQOlQK9Q==}
+
+  '@types/lodash@4.17.25':
+    resolution: {integrity: sha512-+K1NIO8I+F9/wNulfVvu23QYd0Pe9/OCqRrim4NoYIf1VoEDL90Ve4ClzpyqBLc7NpGGWRvYNCKZ1BE/Jpf8dQ==}
+
   '@types/mockjs@1.0.10':
     resolution: {integrity: sha512-SXgrhajHG7boLv6oU93CcmdDm0HYRiceuz6b+7z+/2lCJPTWDv0V5YiwFHT2ejE4bQqgSXQiVPQYPWv7LGsK1g==}
 
@@ -1306,6 +1318,9 @@ packages:
   locate-path@6.0.0:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
+
+  lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
 
   lodash@4.18.1:
     resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
@@ -2333,6 +2348,12 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
+  '@types/lodash.clonedeep@4.5.9':
+    dependencies:
+      '@types/lodash': 4.17.25
+
+  '@types/lodash@4.17.25': {}
+
   '@types/mockjs@1.0.10': {}
 
   '@types/node@24.13.3':
@@ -2910,6 +2931,8 @@ snapshots:
   locate-path@6.0.0:
     dependencies:
       p-locate: 5.0.0
+
+  lodash.clonedeep@4.5.0: {}
 
   lodash@4.18.1: {}
 

@@ -1,5 +1,5 @@
 import {Outlet} from "react-router-dom"
-import useLoadUserData from "../hooks/useLoadUseData"
+import useLoadUserData from "../hooks/useLoadUserData"
 
 import useNavPage from "../hooks/useNavPage"
 import { Spin } from "antd"

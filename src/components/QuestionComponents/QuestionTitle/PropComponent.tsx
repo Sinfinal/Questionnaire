@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 
 function PropComponent(props:QuestionTitlePropsType){
-    const {text,level,isCenter,onChange}=props
+    const {text,level,isCenter,disabled,onChange}=props
     const [form]=Form.useForm()
     useEffect(()=>{
         form.setFieldsValue({
@@ -21,7 +21,7 @@ function PropComponent(props:QuestionTitlePropsType){
 
 
     return (
-        <Form form={form} layout="vertical" onValuesChange={handleValueChange} initialValues={{text,level,isCenter}}>
+        <Form form={form} disabled={disabled} layout="vertical" onValuesChange={handleValueChange} initialValues={{text,level,isCenter}}>
             <Form.Item label="标题内容" name="text" rules={[{required:true,message:"请输入标题内容"}]}>
                 <Input/>
             </Form.Item>

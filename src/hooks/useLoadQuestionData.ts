@@ -24,7 +24,7 @@ function useLoadQuestionData(){
             selectedId=componentList[0].fe_id
 
         }
-        dispatch(resetComponents({componentList,selectedId}))
+        dispatch(resetComponents({componentList,selectedId,copiedComponent:null}))
     },[data])
    useEffect(()=>{
     run(id)

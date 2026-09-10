@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Logo from '../components/Logo';
 import styles from "./MainLayout.module.scss";
 import UserInfo from '../components/UserInfo';
-import useLoadUserData from '../hooks/useLoadUseData';
+import useLoadUserData from '../hooks/useLoadUserData';
 import useNavPage from '../hooks/useNavPage';
 const { Header, Footer, Content } = Layout;
 

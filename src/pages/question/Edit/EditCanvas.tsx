@@ -1,4 +1,5 @@
 
+import classNames from "classnames"
 import styles from "./EditCanvas.module.scss"
 
 import { Spin } from "antd"
@@ -33,11 +34,16 @@ function EditCanvas(props:PropsType){
         </div>
     }
     return <div className={styles.canvas}>
-        {componentList.map(c=>{
-            const {fe_id}=c
+        {componentList.filter(c=>!c.isHidden).map(c=>{
+            const {fe_id,isLocked}=c
             const wrapperDefaultClassName=styles['component-wrapper']
             const selectedClassName=styles.selected
-            const wrapperClassname=`${wrapperDefaultClassName} ${fe_id===selectedId?selectedClassName:""}`.trim()
+            const lockedClassName=styles.locked
+            const wrapperClassname=classNames({
+                [wrapperDefaultClassName]:true,
+                [selectedClassName]:fe_id===selectedId,
+                [lockedClassName]:isLocked
+            })
             return<div key={fe_id} className={wrapperClassname} onClick={(e)=>handleClick(e,fe_id)}>
                 <div className={styles.component}>
                     {genComponent(c)}

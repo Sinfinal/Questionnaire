@@ -8,7 +8,7 @@ const instance =axios.create({
 //request 拦截：每次请求带上token
 instance.interceptors.request.use(
     config=>{
-        config.headers["Authorization"]=`Bearer ${getToken}`
+        config.headers["Authorization"]=`Bearer ${getToken()}`
         return config
     },
     error=>Promise.reject(error)
