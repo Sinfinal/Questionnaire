@@ -8,6 +8,7 @@ import { getComponentConfByType } from "../../../components/QuestionComponents"
 import { changeSelectedId, type ComponentInfoType } from "../../../store/componentsReducer/index.ts"
 import { useDispatch } from "react-redux"
 import type { MouseEvent } from "react"
+import useBindCanvasKeyPress from "../../../hooks/useBindCanvasKeyPress.ts"
 type PropsType={
     loading:boolean
 
@@ -44,6 +45,7 @@ function EditCanvas(props:PropsType){
                 [selectedClassName]:fe_id===selectedId,
                 [lockedClassName]:isLocked
             })
+            useBindCanvasKeyPress()
             return<div key={fe_id} className={wrapperClassname} onClick={(e)=>handleClick(e,fe_id)}>
                 <div className={styles.component}>
                     {genComponent(c)}

@@ -1,8 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 import { type ComponentPropsType } from "../../../components/QuestionComponents"
+import { nanoid } from "@reduxjs/toolkit"
 import { produce } from "immer"
-import { getNextSelectedId } from "./utils"
+import { getNextSelectedId, insertNewComponent } from "./utils"
 import cloneDeep from "lodash.clonedeep"
 export type ComponentInfoType={
     fe_id:string
@@ -22,33 +23,33 @@ const INIT_STATE:ComponentsStateType={
     componentList:[],
     copiedComponent:null
 }
-export const componentsSlice=createSlice({
-    name:"components",
-    initialState:INIT_STATE,
-    reducers:{
-        resetComponents:(_state:ComponentsStateType,action:PayloadAction<ComponentsStateType>)=>{
+export const componentsSlice = createSlice({
+    name: "components",
+    initialState: INIT_STATE,
+    reducers: {
+        resetComponents: (_state: ComponentsStateType, action: PayloadAction<ComponentsStateType>) => {
             return action.payload
         },
 
         changeSelectedId:(state:ComponentsStateType,action:PayloadAction<string>)=>{
             state.selectedId=action.payload
         },
-        addComponent:(state:ComponentsStateType,action:PayloadAction<ComponentInfoType>)=>{
-            const newComponent=action.payload
-            const {selectedId,componentList}=state
-            const index=componentList.findIndex(c=>c.fe_id===selectedId)
-            if(index<0){
+        addComponent: (state: ComponentsStateType, action: PayloadAction<ComponentInfoType>) => {
+            const newComponent = action.payload
+            const { selectedId, componentList } = state
+            const index = componentList.findIndex(c => c.fe_id === selectedId)
+            if (index < 0) {
                 state.componentList.push(newComponent)
-            }else{
-                state.componentList.splice(index+1,0,newComponent)
+            } else {
+                state.componentList.splice(index + 1, 0, newComponent)
             }
-            state.selectedId=newComponent.fe_id
+            state.selectedId = newComponent.fe_id
         },
-        changeComponentProps:(state:ComponentsStateType,action:PayloadAction<{id:string,newProps:ComponentPropsType}>)=>{
-            const {id,newProps}=action.payload
-            const curComp=state.componentList.find(c=>c.fe_id===id)
-            if(curComp){
-                curComp.props={
+        changeComponentProps: (state: ComponentsStateType, action: PayloadAction<{ id: string, newProps: ComponentPropsType }>) => {
+            const { id, newProps } = action.payload
+            const curComp = state.componentList.find(c => c.fe_id === id)
+            if (curComp) {
+                curComp.props = {
                     ...curComp.props,
                     ...newProps,
                 }
@@ -99,11 +100,26 @@ export const componentsSlice=createSlice({
         pasteCopiedComponent:produce(
             (draft:ComponentsStateType)=>{
                 const {copiedComponent}=draft
-                
+                if (copiedComponent==null)return 
+                copiedComponent.fe_id=nanoid()
+                insertNewComponent(draft,copiedComponent)
             }
-        )
+        ),
+        selectPrevComponent:produce((draft:ComponentsStateType)=>{
+            const {selectedId,componentList}=draft
+            const selectedIndex=componentList.findIndex(c=>c.fe_id===selectedId)
+            if(selectedIndex<=0)return
+            draft.selectedId=componentList[selectedIndex-1].fe_id
+        }),
+        selectNextComponent:produce((draft:ComponentsStateType)=>{
+             const {selectedId,componentList}=draft
+            const selectedIndex=componentList.findIndex(c=>c.fe_id===selectedId)
+            if(selectedIndex<0)return
+            if(selectedIndex+1===componentList.length)return
+            draft.selectedId=componentList[selectedIndex+1].fe_id
+        })
     }, 
 })
 
-export const {resetComponents,changeSelectedId,addComponent,changeComponentProps,removeSelectedComponent,changeComponentHidden,toggleComponentLocked,copySelectedComponent}=componentsSlice.actions
+export const {resetComponents,changeSelectedId,addComponent,changeComponentProps,removeSelectedComponent,changeComponentHidden,toggleComponentLocked,copySelectedComponent,pasteCopiedComponent,selectPrevComponent,selectNextComponent}=componentsSlice.actions
 export default componentsSlice.reducer

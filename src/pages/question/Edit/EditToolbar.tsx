@@ -1,7 +1,7 @@
 import { BlockOutlined, DeleteOutlined, EyeInvisibleOutlined, LockOutlined } from "@ant-design/icons"
 import {Button,Space, Tooltip} from "antd"
 import { useDispatch} from "react-redux"
-import { changeComponentHidden, copySelectedComponent, removeSelectedComponent, toggleComponentLocked } from "../../../store/componentsReducer/index.ts"
+import { changeComponentHidden, copySelectedComponent, pasteCopiedComponent, removeSelectedComponent, toggleComponentLocked } from "../../../store/componentsReducer/index.ts"
 import useGetComponentInfo from "../../../hooks/useGetComponentInfo.ts"
 function EditToolbar(){
     const dispatch=useDispatch()
@@ -20,7 +20,7 @@ function EditToolbar(){
         dispatch(copySelectedComponent())
     }
     function handlepaste(){
-        dispatch(pasteSelectedComponent())
+        dispatch(pasteCopiedComponent())
     }
     return (
     <Space>
